@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Demo</title>
+</head>
+<body>
+    <h1 id="people"></h1>
+    <script>
+        const url = "http://127.0.0.1:5500/people.json"
+        fetch(url)
+        .then(function(response) {
+            console.log(response.headers.get('Content-Type'));
+            console.log(response.headers.get('Date'));
+            console.log(response.status);
+            console.log(response.statusText);
+            console.log(response.type);
+            console.log(response.url);
+            console.log(response.text);
+            return response.json();
+        })
+        .then(function(data) {
+            console.log (data);
+            let people = data.people;
+            let output = "";
+            for (let i = 0; i < people.length; i++) {
+               output += "<li>"+people[i].name+"</li>";
+               // console.log(output);
+            }
+        
+            document.getElementById("people").innerHTML = output;
+        });
+        
+     
+    </script>
+
+
+</body>
+</html>
